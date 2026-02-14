@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MB Security Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* --- Reset & Body --- */
+* {margin:0; padding:0; box-sizing:border-box;}
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(120deg,#0f0f0f,#1a1a1a);
+  color:#fff;
+  perspective:1200px;
+  overflow-x:hidden;
+}
+
+/* --- Header --- */
+header {
+  background:#0a0a0a;
+  text-align:center;
+  padding:25px;
+  border-bottom: 2px solid #00fff7;
+}
+header h1 {font-size:32px; color:#00fff7;}
+header p {color:#aaa; margin-top:5px; font-size:16px;}
+
+/* --- Navigation --- */
+nav {
+  display:flex; justify-content:center; flex-wrap:wrap;
+  background:#111; border-bottom:2px solid #00fff7;
+}
+nav button {
+  border:2px solid #00fff7; background:none; color:#00fff7;
+  margin:8px; padding:12px 20px; font-size:16px; border-radius:10px;
+  cursor:pointer; transition:0.3s all;
+}
+nav button:hover {background:#00fff7; color:#111; transform:scale(1.1) rotate(-2deg);}
+
+/* --- Sections --- */
+section {display:none; padding:50px 20px;}
+.active {display:block; animation:fadeIn 0.7s ease-in-out;}
+
+/* --- Cards 3D Effect --- */
+.cards {display:flex; flex-wrap:wrap; justify-content:center; gap:30px; margin-top:30px;}
+.card {
+  background:linear-gradient(145deg,#111,#1a1a1a);
+  width:300px; height:400px; border-radius:20px;
+  box-shadow:0 15px 30px rgba(0,255,255,0.3);
+  transition: transform 0.5s, box-shadow 0.5s;
+  transform-style: preserve-3d;
+  cursor:pointer;
+  overflow:hidden;
+}
+.card:hover {
+  transform: rotateY(15deg) rotateX(10deg) translateZ(20px) scale(1.05);
+  box-shadow:0 25px 50px rgba(0,255,255,0.6);
+}
+.card img {
+  width:100%; height:180px; object-fit:cover; border-bottom:1px solid #0ff;
+}
+.card h3 {margin:15px; font-size:18px; color:#0ff;}
+.card p {margin:0 15px; font-size:14px; color:#aaa;}
+
+/* --- Question Form --- */
+#askForm {margin-top:40px; text-align:center;}
+#askForm input, #askForm textarea {
+  width:80%; max-width:500px; padding:10px; margin:10px 0; border-radius:10px;
+  border:1px solid #0ff; background:#111; color:#fff;
+}
+#askForm button {
+  padding:10px 25px; border:none; border-radius:10px;
+  background:#0ff; color:#000; cursor:pointer; font-weight:bold; transition:0.3s;
+}
+#askForm button:hover {background:#fff; color:#000; transform:scale(1.05);}
+
+/* --- Footer --- */
+footer {text-align:center; padding:25px; border-top:2px solid #00fff7; margin-top:50px; font-size:16px;}
+footer a {color:#00fff7; text-decoration:none; font-weight:bold;}
+footer a:hover {color:#fff;}
+
+/* --- Animations --- */
+@keyframes fadeIn {from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);}}
+</style>
+<script>
+function showPage(pageId){
+  let sections = document.querySelectorAll("section");
+  sections.forEach(sec=>sec.classList.remove("active"));
+  document.getElementById(pageId).classList.add("active");
+}
+function submitQuestion(e){
+  e.preventDefault();
+  alert("تم إرسال سؤالك! سيتم الرد قريباً.");
+  document.getElementById('askForm').reset();
+}
+</script>
+</head>
+<body>
+
+<header>
+  <h1>MB Security Academy</h1>
+  <p>تعلم الأمن السيبراني و Kali Linux</p>
+</header>
+
+<nav>
+  <button onclick="showPage('home')">الرئيسية</button>
+  <button onclick="showPage('basics')">الأساسيات</button>
+  <button onclick="showPage('kali')">Kali Linux</button>
+  <button onclick="showPage('tools')">الأدوات</button>
+  <button onclick="showPage('practice')">التطبيق العملي</button>
+</nav>
+
+<!-- الرئيسية -->
+<section id="home" class="active">
+<h2>مرحبا بك في عالم الأمن السيبراني</h2>
+<div class="cards">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1518770660439-4636190af475">
+<h3>تعلم الاختراق الأخلاقي</h3>
+<p>ابدأ رحلتك في مجال Cyber Security خطوة بخطوة.</p>
+</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5">
+<h3>حماية الأنظمة</h3>
+<p>تعلم كيف تحمي نفسك من الهجمات.</p>
+</div>
+</div>
+</section>
+
+<!-- الأساسيات -->
+<section id="basics">
+<h2>أساسيات الأمن السيبراني</h2>
+<div class="cards">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c">
+<h3>الشبكات</h3>
+<p>فهم IP و Ports و البروتوكولات.</p>
+</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e">
+<h3>Linux</h3>
+<p>أهم أوامر لينكس للمبتدئين.</p>
+</div>
+</div>
+</section>
+
+<!-- Kali -->
+<section id="kali">
+<h2>Kali Linux</h2>
+<div class="cards">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1593642532400-2682810df593">
+<h3>تثبيت Kali</h3>
+<p>شرح تثبيت النظام بسهولة.</p>
+</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085">
+<h3>الأدوات</h3>
+<p>استخدام أشهر أدوات الاختبار.</p>
+</div>
+</div>
+</section>
+
+<!-- الأدوات -->
+<section id="tools">
+<h2>أدوات الاختبار</h2>
+<div class="cards">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c">
+<h3>Nmap</h3>
+<p>فحص الشبكات واكتشاف المنافذ.</p>
+</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1508780709619-79562169bc64">
+<h3>Metasploit</h3>
+<p>اختبار الثغرات الأمنية.</p>
+</div>
+</div>
+</section>
+
+<!-- التطبيق العملي -->
+<section id="practice">
+<h2>التطبيق العملي</h2>
+<div class="cards">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1537432376769-00a3e4f89c8f">
+<h3>مختبر افتراضي</h3>
+<p>إنشاء بيئة تجارب آمنة.</p>
+</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1526378722484-cc5c5107b6f5">
+<h3>تمارين حقيقية</h3>
+<p>تطبيق عملي على الاختراق الأخلاقي.</p>
+</div>
+</div>
+
+<!-- واجهة اسألني -->
+<div id="askForm">
+<h3>لديك سؤال؟ اسألنا</h3>
+<form onsubmit="submitQuestion(event)">
+<input type="text" placeholder="اسمك" required>
+<textarea placeholder="سؤالك..." rows="4" required></textarea>
+<br>
+<button type="submit">إرسال السؤال</button>
+</form>
+</div>
+</section>
+
+<footer>
+<p>تابعني على إنستغرام: <a href="https://instagram.com/mohamedmb277" target="_blank">@mohamedmb277</a></p>
+</footer>
+
+</body>
+    </html>
