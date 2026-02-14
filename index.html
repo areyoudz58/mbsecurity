@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Nexus | mohamedmb277</title>
+    <style>
+        /* إعدادات المتغيرات والتصميم العام */
+        :root {
+            --bg: #050505;
+            --surface: #121212;
+            --primary: #ffffff;
+            --secondary: #888888;
+            --border: #333333;
+            --glitch-speed: 0.3s;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg);
+            color: var(--primary);
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: hidden;
+        }
+
+        /* تأثير الخلفية الشبكية 3D */
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(500px) rotateX(60deg);
+            transform-origin: top;
+            opacity: 0.2;
+            z-index: -1;
+            animation: moveGrid 10s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 500px; }
+        }
+
+        /* الهيكل الرئيسي */
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border: 1px solid var(--border);
+            margin-bottom: 30px;
+            background: rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        .glitch {
+            font-size: 3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* نظام التبويبات (Pages) */
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .nav-btn {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 10px 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--primary);
+            color: var(--bg);
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+            background: var(--surface);
+            padding: 40px;
+            border-left: 5px solid var(--primary);
+            min-height: 400px;
+        }
+
+        .content-section.active { display: block; }
+
+        /* تفاصيل المحتوى */
+        .tool-card {
+            border: 1px solid var(--border);
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+
+        .tool-card:hover {
+            border-color: var(--primary);
+            transform: translateX(-10px);
+        }
+
+        .code-block {
+            background: #000;
+            padding: 15px;
+            color: #0f0; /* اللون الأخضر الكلاسيكي للهكر */
+            font-size: 0.9em;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #222;
+        }
+
+        /* علامة انستغرام الاحترافية */
+        .instagram-footer {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            color: black;
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            z-index: 100;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+
+    <div class="container">
+        <header>
+            <div class="glitch">CYBER SECURITY HUB</div>
+            <p style="color: var(--secondary); margin-top: 10px;">بإشراف الخبير: mohamedmb277</p>
+        </header>
+
+        <nav class="nav-menu">
+            <button class="nav-btn active" onclick="showPage('home')">الرئيسية</button>
+            <button class="nav-btn" onclick="showPage('learn')">خارطة التعلم</button>
+            <button class="nav-btn" onclick="showPage('tools')">الأدوات الهجومية</button>
+            <button class="nav-btn" onclick="showPage('defend')">طرق الدفاع</button>
+        </nav>
+
+        <section id="home" class="content-section active">
+            <h2>مرحباً بك في مركز العمليات</h2>
+            <p style="margin: 20px 0; line-height: 1.6;">هذا الموقع صمم ليكون مرجعاً سريعاً لتعلم أساسيات الأمن السيبراني. نحن ننتقل من مجرد مستخدمين إلى "محللي أمن سيبراني".</p>
+            <div class="code-block">
+                root@mohamedmb277:~# scan_network --target world<br>
+                [+] System Status: Ready<br>
+                [+] Learning Modules: Loaded
+            </div>
+        </section>
+
+        <section id="learn" class="content-section">
+            <h2>كيف تبدأ؟ (Roadmap)</h2>
+            <div class="tool-card">
+                <h3>1. الأساسيات (Foundations)</h3>
+                <p>تعلم أنظمة Linux، لغة Python، وبروتوكولات الشبكات (TCP/IP).</p>
+            </div>
+            <div class="tool-card">
+                <h3>2. اختبار الاختراق (Pentesting)</h3>
+                <p>فهم كيفية عمل الثغرات مثل SQL Injection و XSS.</p>
+            </div>
+            <div class="tool-card">
+                <h3>3. الهندسة العكسية</h3>
+                <p>تحليل البرمجيات الخبيثة وفك شيفرتها.</p>
+            </div>
+        </section>
+
+        <section id="tools" class="content-section">
+            <h2>ترسانة الأدوات</h2>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr style="border-bottom: 2px solid white;">
+                    <th style="padding: 10px; text-align: right;">الأداة</th>
+                    <th style="padding: 10px; text-align: right;">الوظيفة</th>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;">Nmap</td>
+                    <td style="padding: 10px;">فحص بوابات الشبكة (Ports)</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;">Wireshark</td>
+                    <td style="padding: 10px;">تحليل البيانات المارة في الشبكة</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;">John the Ripper</td>
+                    <td style="padding: 10px;">كسر كلمات المرور المشفرة</td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="defend" class="content-section">
+            <h2>نصائح الحماية الشخصية</h2>
+            <ul>
+                <li>تفعيل التحقق الثنائي (2FA) في كل حساباتك.</li>
+                <li>استخدام VPN مشفر عند الاتصال بشبكات عامة.</li>
+                <li>تحديث الأنظمة (Patch Management) بشكل دوري.</li>
+            </ul>
+        </section>
+    </div>
+
+    <a href="https://instagram.com/mohamedmb277" target="_blank" class="instagram-footer">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.999 0h.002zm-.008 1.44c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.281.11-.705.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+        </svg>
+        mohamedmb277
+    </a>
+
+    <script>
+        function showPage(pageId) {
+            // إخفاء كل الصفحات
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            // إزالة الحالة النشطة من الأزرار
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // إظهار الصفحة المطلوبة
+            document.getElementById(pageId).classList.add('active');
+            // تفعيل الزر المناسب
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+  </html>
