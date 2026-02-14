@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MB Security Academy 3D Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* --- Reset & Body --- */
+* {margin:0; padding:0; box-sizing:border-box;}
+body {font-family:'Roboto',sans-serif; background:#0a0a0a; color:#fff; overflow-x:hidden;}
+canvas {position:fixed; top:0; left:0; z-index:-1;}
+
+/* --- Header --- */
+header {text-align:center; padding:30px;}
+header h1 {font-size:36px; color:#0ff; text-shadow:0 0 10px #0ff,0 0 20px #0ff;}
+header p {margin-top:5px; color:#aaa; font-size:16px;}
+
+/* --- Navigation --- */
+nav {display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin-bottom:20px;}
+nav button {border:2px solid #0ff; background:none; color:#0ff; padding:12px 22px; font-size:16px; border-radius:12px; cursor:pointer; transition:0.3s; text-transform:uppercase;}
+nav button:hover {background:#0ff; color:#000; transform:scale(1.1) rotate(-3deg); box-shadow:0 0 20px #0ff;}
+
+/* --- Sections --- */
+section {display:none; padding:40px 20px;}
+.active {display:block; animation:fadeIn 0.7s ease-in-out;}
+
+/* --- 3D Cards --- */
+.cards {display:flex; flex-wrap:wrap; justify-content:center; gap:30px; margin-top:30px;}
+.card {
+  background:linear-gradient(145deg,#111,#1a1a1a);
+  width:280px; height:380px; border-radius:25px;
+  box-shadow:0 15px 30px rgba(0,255,255,0.3);
+  transition: transform 0.5s, box-shadow 0.5s;
+  transform-style: preserve-3d; cursor:pointer; overflow:hidden;
+  position:relative;
+}
+.card::before {
+  content:""; position:absolute; top:0; left:0; width:100%; height:100%;
+  background:rgba(0,255,255,0.05); mix-blend-mode:screen; pointer-events:none;
+}
+.card:hover {
+  transform: rotateY(20deg) rotateX(10deg) translateZ(20px) scale(1.07);
+  box-shadow:0 25px 60px rgba(0,255,255,0.7);
+}
+.card img {width:100%; height:180px; object-fit:cover; border-bottom:1px solid #0ff; border-radius:15px 15px 0 0;}
+.card h3 {margin:15px; font-size:20px; color:#0ff; text-shadow:0 0 5px #0ff;}
+.card p {margin:0 15px; font-size:14px; color:#aaa;}
+
+/* --- Question Form --- */
+#askForm {margin-top:50px; text-align:center;}
+#askForm input, #askForm textarea {width:80%; max-width:500px; padding:12px; margin:10px 0; border-radius:12px; border:1px solid #0ff; background:#111; color:#fff;}
+#askForm button {padding:12px 25px; border:none; border-radius:12px; background:#0ff; color:#000; font-weight:bold; cursor:pointer; transition:0.3s; text-transform:uppercase;}
+#askForm button:hover {background:#fff; color:#000; transform:scale(1.05);}
+
+/* --- Footer --- */
+footer {text-align:center; padding:25px; border-top:2px solid #0ff; margin-top:50px; font-size:16px;}
+footer a {color:#0ff; text-decoration:none; font-weight:bold;}
+footer a:hover {color:#fff;}
+
+/* --- Animations --- */
+@keyframes fadeIn {from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);}}
+</style>
+<script>
+// --- Navigation Pages ---
+function showPage(pageId){
+  let sections=document.querySelectorAll("section");
+  sections.forEach(sec=>sec.classList.remove("active"));
+  document.getElementById(pageId).classList.add("active");
+}
+// --- Ask Form ---
+function submitQuestion(e){
+  e.preventDefault();
+  alert("تم إرسال سؤالك! سيتم الرد قريباً.");
+  document.getElementById('askForm').reset();
+}
+
+// --- Canvas Background 3D Grid ---
+let canvas, ctx, w, h, particles=[];
+window.onload=function(){
+  canvas=document.createElement("canvas");
+  document.body.appendChild(canvas);
+  ctx=canvas.getContext("2d");
+  w=canvas.width=window.innerWidth;
+  h=canvas.height=window.innerHeight;
+  for(let i=0;i<150;i++){
+    particles.push({x:Math.random()*w, y:Math.random()*h, z:Math.random()*1000-500, speed:0.5+Math.random()});
+  }
+  animate();
+}
+window.onresize=function(){ w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight; }
+function animate(){
+  ctx.fillStyle="#0a0a0a";
+  ctx.fillRect(0,0,w,h);
+  particles.forEach(p=>{
+    p.z+=p.speed;
+    if(p.z>500) p.z=-500;
+    let scale=500/(500+p.z);
+    let x=w/2+(p.x-w/2)*scale;
+    let y=h/2+(p.y-h/2)*scale;
+    let size=(1-scale)*5;
+    ctx.beginPath();
+    ctx.arc(x,y,size,0,Math.PI*2);
+    ctx.fillStyle="rgba(0,255,255,0.7)";
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+</script>
+</head>
+<body>
+
+<header>
+<h1>MB Security Academy 3D Pro</h1>
+<p>تعلم الأمن السيبراني و Kali Linux</p>
+</header>
+
+<nav>
+<button onclick="showPage('home')">الرئيسية</button>
+<button onclick="showPage('basics')">الأساسيات</button>
+<button onclick="showPage('kali')">Kali Linux</button>
+<button onclick="showPage('tools')">الأدوات</button>
+<button onclick="showPage('practice')">التطبيق العملي</button>
+</nav>
+
+<section id="home" class="active">
+<h2>مرحبا بك في عالم الأمن السيبراني</h2>
+<div class="cards">
+<div class="card"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475"><h3>اختراق أخلاقي</h3><p>ابدأ رحلتك خطوة بخطوة</p></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5"><h3>حماية الأنظمة</h3><p>تعلم حماية نفسك من الهجمات</p></div>
+</div>
+</section>
+
+<section id="basics">
+<h2>أساسيات الأمن السيبراني</h2>
+<div class="cards">
+<div class="card"><img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c"><h3>الشبكات</h3><p>فهم IP و Ports و البروتوكولات</p></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e"><h3>Linux</h3><p>أوامر لينكس المهمة</p></div>
+</div>
+</section>
+
+<section id="kali">
+<h2>Kali Linux</h2>
+<div class="cards">
+<div class="card"><img src="https://images.unsplash.com/photo-1593642532400-2682810df593"><h3>تثبيت Kali</h3><p>شرح تثبيت النظام بسهولة</p></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"><h3>الأدوات</h3><p>استخدام أشهر أدوات الاختبار</p></div>
+</div>
+</section>
+
+<section id="tools">
+<h2>أدوات الاختبار</h2>
+<div class="cards">
+<div class="card"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c"><h3>Nmap</h3><p>فحص الشبكات واكتشاف المنافذ</p></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1508780709619-79562169bc64"><h3>Metasploit</h3><p>اختبار الثغرات الأمنية</p></div>
+</div>
+</section>
+
+<section id="practice">
+<h2>التطبيق العملي</h2>
+<div class="cards">
+<div class="card"><img src="https://images.unsplash.com/photo-1537432376769-00a3e4f89c8f"><h3>مختبر افتراضي</h3><p>بيئة تجارب آمنة</p></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1526378722484-cc5c5107b6f5"><h3>تمارين حقيقية</h3><p>تطبيق عملي على الاختراق الأخلاقي</p></div>
+</div>
+
+<div id="askForm">
+<h3>لديك سؤال؟ اسألنا</h3>
+<form onsubmit="submitQuestion(event)">
+<input type="text" placeholder="اسمك" required>
+<textarea placeholder="سؤالك..." rows="4" required></textarea><br>
+<button type="submit">إرسال السؤال</button>
+</form>
+</div>
+</section>
+
+<footer>
+<p>تابعني على إنستغرام: <a href="https://instagram.com/mohamedmb277" target="_blank">@mohamedmb277</a></p>
+</footer>
+
+</body>
+  </html>
